@@ -17,7 +17,7 @@ namespace AutoWifiConnect
 
         static void Main(string[] args)
         {
-            Console.Title = "AutoWifiConnect v1.0 20220209";   
+            Console.Title = "AutoWifiConnect v1.1";   
             string ssid = string.Empty;
             string[] cmd_result;
             string program_path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);//取得程式所在目錄
@@ -73,13 +73,13 @@ namespace AutoWifiConnect
                             string[] split_new_line = cmd_result[0].Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                             foreach (string s in split_new_line)
                             {
-                                if (s.Contains("State"))
+                                if (s.Contains("State") || s.Contains("狀態"))
                                 {
 #if Debug
                                     Console.WriteLine("have[State]");
 #endif
                                     string[] split_state = s.Split(':');
-                                    if (split_state[1].Contains("disconnected"))
+                                    if (split_state[1].Contains("disconnected") || split_state[1].Contains("中斷連線"))
                                     {
                                         go_connect = true;
 #if Debug
@@ -89,7 +89,7 @@ namespace AutoWifiConnect
                                     else
                                     {
 #if Debug
-                                        Console.WriteLine("State[connected]");
+                                        Console.WriteLine("State[Connected]");
 #endif
                                     }
                                     break;
